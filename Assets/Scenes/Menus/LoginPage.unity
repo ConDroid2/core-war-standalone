@@ -2632,6 +2632,7 @@ MonoBehaviour:
     playerName: 
     value:
       test: 
+      decks: []
 --- !u!114 &1577923936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2644,6 +2645,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e4da0fec6963374fbec7fa2b47a5333, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardJSON: {fileID: 4900000, guid: ae85c2bdabfa91640a7ef83c5a074560, type: 3}
   CardsLoaded: 0
 --- !u!4 &1577923937
 Transform:

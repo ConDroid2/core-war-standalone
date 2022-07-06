@@ -8,6 +8,8 @@ public class CardLibrary : MonoBehaviour
 {
     private readonly string url = "https://vq75aojrne.execute-api.us-east-1.amazonaws.com/dev/";
 
+    [SerializeField] private TextAsset cardJSON;
+
     public bool CardsLoaded = false;
 
     public Dictionary<string, Card> library = new Dictionary<string, Card>();
@@ -28,7 +30,15 @@ public class CardLibrary : MonoBehaviour
 
     public void LoadLibrary()
     {
-        StartCoroutine(GetCardsCoroutine());
+        CardJsonList cards = JsonUtility.FromJson<CardJsonList>(cardJSON.text);
+
+        foreach (CardJson json in cards.cards)
+        {
+            library.Add(json.name, new Card(json, true));
+        }
+
+        OnLibraryDoneLoading?.Invoke(library.Count != 0);
+        // StartCoroutine(GetCardsCoroutine());
     }
 
     IEnumerator GetCardsCoroutine()
