@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
-using UnityEngine.Networking;
 
 public static class DeckSaveSystem
 {
@@ -27,13 +25,14 @@ public static class DeckSaveSystem
         string data = JsonUtility.ToJson(PlayerDataWrapper.Instance.player);
         Debug.Log("Player Json: ");
         Debug.Log(data);
-        UnityWebRequest putRequest = UnityWebRequest.Put("https://eytluyssud.execute-api.us-east-1.amazonaws.com/dev/", data);
-        putRequest.SendWebRequest().completed += HandleDeckSaved;
-    }
 
-    public static void HandleDeckSaved(AsyncOperation operation)
-    {
-        Debug.Log("Sent new data");
+        string path = Application.persistentDataPath + "/playerData.data";
+
+        if (File.Exists(path))
+        {
+           // Debug.Log("Saving Decks");
+            File.WriteAllText(path, data);
+        }
     }
 
     public static DeckData LoadDeck(int slot) 

@@ -1037,6 +1037,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e4da0fec6963374fbec7fa2b47a5333, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardJSON: {fileID: 0}
   CardsLoaded: 0
 --- !u!4 &1275389624
 Transform:
@@ -1705,3 +1706,80 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1844724802}
   m_CullTransparentMesh: 0
+--- !u!1 &2052677105
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2052677109}
+  - component: {fileID: 2052677108}
+  - component: {fileID: 2052677107}
+  - component: {fileID: 2052677106}
+  m_Layer: 0
+  m_Name: PersistantData
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2052677106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052677105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe7c00c239f5c6b4d89680e273c5baca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2052677107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052677105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 953d2875f96cb41438a3c6bc70ac1d8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player:
+    playerName: 
+    value:
+      test: 
+      decks: []
+    decks: []
+--- !u!114 &2052677108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052677105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e4da0fec6963374fbec7fa2b47a5333, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardJSON: {fileID: 4900000, guid: ae85c2bdabfa91640a7ef83c5a074560, type: 3}
+  CardsLoaded: 0
+--- !u!4 &2052677109
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052677105}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

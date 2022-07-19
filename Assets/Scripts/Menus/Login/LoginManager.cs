@@ -76,37 +76,40 @@ public class LoginManager : MonoBehaviour
 
     IEnumerator GetPlayerData(string username)
     {
-        LoadingPlayer?.Invoke();
-        UnityWebRequest playerRequest = UnityWebRequest.Get(getUrl);
+        //LoadingPlayer?.Invoke();
+        //UnityWebRequest playerRequest = UnityWebRequest.Get(getUrl);
 
-        yield return playerRequest.SendWebRequest();
+        //yield return playerRequest.SendWebRequest();
 
-        if (playerRequest.isNetworkError || playerRequest.isHttpError)
-        {
-            Debug.Log("Error getting players");
-        }
+        //if (playerRequest.isNetworkError || playerRequest.isHttpError)
+        //{
+        //    Debug.Log("Error getting players");
+        //}
 
-        else
-        {
-            PlayerList players = JsonUtility.FromJson<PlayerList>(playerRequest.downloadHandler.text);
+        //else
+        //{
+        //    PlayerList players = JsonUtility.FromJson<PlayerList>(playerRequest.downloadHandler.text);
 
-            PlayerDataWrapper.Instance.player = null;
+        //    PlayerDataWrapper.Instance.player = null;
 
-            foreach (PlayerData player in players.players)
-            {
-                if (player.playerName == username)
-                {
-                    if (player.value.decks == null)
-                    {
-                        player.value.decks = new DeckData[0];
-                    }
+        //    foreach (PlayerData player in players.players)
+        //    {
+        //        if (player.playerName == username)
+        //        {
+        //            if (player.value.decks == null)
+        //            {
+        //                player.value.decks = new DeckData[0];
+        //            }
 
-                    PlayerDataWrapper.Instance.player = player;
-                }
-            }
+        //            PlayerDataWrapper.Instance.player = player;
+        //        }
+        //    }
 
-            Login();
-        }
+        //    Login();
+        //}
+
+        Login();
+        yield return null;
     }
 
     

@@ -9,6 +9,7 @@ public class PlayerData
 {
     public string playerName;
     public PlayerInfo value;
+    public DeckData[] decks;
 }
 
 [Serializable]
@@ -36,6 +37,27 @@ public class PlayerDataWrapper : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+
+            string path = Application.persistentDataPath + "/playerData.data";
+
+            if (System.IO.File.Exists(path))
+            {
+                string data = System.IO.File.ReadAllText(path);
+                player = JsonUtility.FromJson<PlayerData>(data);
+
+                Debug.Log("Loaded player: " + data);
+            }
+            else
+            {
+                PlayerData newPlayer = new PlayerData();
+                newPlayer.playerName = "Player";
+                newPlayer.decks = new DeckData[0];
+
+                string data = JsonUtility.ToJson(newPlayer);
+                System.IO.File.WriteAllText(path, data);
+
+                Debug.Log("Created new Player: " + data);
+            }
         }
     }
 }
