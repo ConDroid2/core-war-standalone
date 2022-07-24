@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
+using SequenceSystem;
 
 public class InPlayCardPool : MonoBehaviour
 {
@@ -59,12 +59,7 @@ public class InPlayCardPool : MonoBehaviour
         card.gameObject.SetActive(false);
         // card.ClearCardInfo();
 
-        Ability[] abilities = card.GetComponents<Ability>();
         AbilityCondition[] conditions = card.GetComponents<AbilityCondition>();
-        foreach (Ability ability in abilities)
-        {
-            Destroy(ability);
-        }
         foreach (AbilityCondition condition in conditions)
         {
             condition.Delete();

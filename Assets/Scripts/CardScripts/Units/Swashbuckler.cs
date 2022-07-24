@@ -16,7 +16,7 @@ public class Swashbuckler : CardScript
         unit.GetComponent<GameActionList>().actions.Add(attack);
     }
 
-    public class SwashbucklerAttack : SequenceSystem.UnitAttack, NetworkedAction
+    public class SwashbucklerAttack : SequenceSystem.UnitAttack
     {
         public SwashbucklerAttack(UnitController unit) : base(unit)
         {

@@ -5,7 +5,7 @@ using DG.Tweening;
 
 namespace SequenceSystem 
 {
-    public class InHandSpellPlay : GameAction, NetworkedAction
+    public class InHandSpellPlay : GameAction
     {
         CardController controller;
         Transform waitPos;

@@ -5,7 +5,7 @@ using DG.Tweening;
 
 namespace SequenceSystem 
 {
-    public class AddToCurrentZone : GameAction, NetworkedAction
+    public class AddToCurrentZone : GameAction
     {
         InPlayCardController controller;
         public AddToCurrentZone(InPlayCardController controller)

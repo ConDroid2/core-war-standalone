@@ -17,7 +17,7 @@ public class Status : MonoBehaviour
     {
         card = GetComponent<UnitController>();
 
-        if (card.photonView.IsMine)
+        if (card.isMine)
         {
             Player.Instance.OnEndTurn += DecreaseCount;
         }
@@ -60,7 +60,7 @@ public class Status : MonoBehaviour
 
     public virtual void RemoveStatus() 
     { 
-        if (card.photonView.IsMine)
+        if (card.isMine)
         {
             Player.Instance.OnEndTurn -= DecreaseCount;
         }

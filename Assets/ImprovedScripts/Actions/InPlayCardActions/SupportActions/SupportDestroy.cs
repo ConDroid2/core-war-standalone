@@ -4,7 +4,7 @@ using System;
 
 namespace SequenceSystem 
 {  
-    public class SupportDestroy : GameAction, NetworkedAction
+    public class SupportDestroy : GameAction
     {
         public event Action<SupportController> OnDestroyEvent;
 

@@ -4,6 +4,6 @@ using UnityEngine;
 
 public static class DevConfigs
 {
-    public static bool IsDevBuild = false;
+    public static bool IsDevBuild = true;
     public static string buildNumber = "0.15.5";
 }

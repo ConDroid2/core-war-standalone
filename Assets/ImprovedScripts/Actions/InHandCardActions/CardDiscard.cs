@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SequenceSystem 
 {
-    public class CardDiscard : GameAction, NetworkedAction
+    public class CardDiscard : GameAction
     {
         CardController cardController;
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SequenceSystem 
 {
-    public class InPlayReturnToHand : GameAction, NetworkedAction
+    public class InPlayReturnToHand : GameAction
     {
         InPlayCardController controller;
         public InPlayReturnToHand(InPlayCardController controller)

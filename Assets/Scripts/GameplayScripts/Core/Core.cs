@@ -85,7 +85,7 @@ public class Core : Zone
 
         // CorePrimed(enteredCard.photonView.IsMine);
 
-        if (enteredCard.photonView.IsMine)
+        if (enteredCard.isMine)
         {
             ChangeInfluence(enteredCard.cardData.currentInfluence, true);
             MainSequenceManager.Instance.Add(enteredCard.discard);

@@ -7,7 +7,7 @@ public class Rooted : Status
     {
         base.Awake();
 
-        if (card.photonView.IsMine)
+        if (card.isMine)
         {
             card.OnMoveStateChanged += RootUnit;
         }
@@ -31,7 +31,7 @@ public class Rooted : Status
     {
         base.RemoveStatus();
 
-        if (card.photonView.IsMine)
+        if (card.isMine)
         {
             card.OnMoveStateChanged -= RootUnit;
 

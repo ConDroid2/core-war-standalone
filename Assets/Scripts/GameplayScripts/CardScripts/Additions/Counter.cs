@@ -34,13 +34,13 @@ public class BuffCounter : Counter
 
     public override void AddCounter()
     {
-        (card as UnitController).photonView.RPC("IncreaseMaxResilience", Photon.Pun.RpcTarget.All,new object[] { resilience});
-        (card as UnitController).photonView.RPC("IncreaseDamage", Photon.Pun.RpcTarget.All, new object[] { strength });
+        (card as UnitController).IncreaseMaxResilience(resilience);
+        (card as UnitController).IncreaseDamage(strength );
     }
 
     public override void RemoveCounter()
     {
-        (card as UnitController).photonView.RPC("IncreaseMaxResilience", Photon.Pun.RpcTarget.All, new object[] { resilience * -1 });
-        (card as UnitController).photonView.RPC("IncreaseDamage", Photon.Pun.RpcTarget.All, new object[] { strength * -1});
+        (card as UnitController).IncreaseMaxResilience(resilience * -1);
+        (card as UnitController).IncreaseDamage(strength * -1);
     }
 }

@@ -78,12 +78,11 @@ public class MouseManager : MonoBehaviour
                                 }
                                 else if (hoveredObject.GetComponent<InPlayCardController>())
                                 {
-                                    if (!hoveredObject.GetComponent<InPlayCardController>().photonView.IsMine)
+                                    if (!hoveredObject.GetComponent<InPlayCardController>().isMine)
                                     {
                                         if (card.unitAttack != null && card.attackState == UnitController.ActionState.CanAct)
                                         {
-                                            object[] rpcData = { hoveredObject.GetComponent<InPlayCardController>().photonView.ViewID };
-                                            card.photonView.RPC("SetAttackTarget", RpcTarget.All, rpcData);
+                                            card.SetAttackTarget(hoveredObject.GetComponent<UnitController>());
                                             MainSequenceManager.Instance.Add(card.AttackStack);
                                         }
                                     }

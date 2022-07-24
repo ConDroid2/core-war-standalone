@@ -115,7 +115,7 @@ public class CardController : CardParent, IPointerEnterHandler, IPointerExitHand
         OnKeywordsChange?.Invoke(cardData.keywords);
         OnSubtypesChange?.Invoke(cardData.subtypes);
 
-        if (isMine)
+        if (!isMine)
         {
             visible.SetActive(false);
             hidden.SetActive(true);
@@ -141,30 +141,12 @@ public class CardController : CardParent, IPointerEnterHandler, IPointerExitHand
 
     public void ClearFunctionality()
     {
-        Ability[] abilities = GetComponents<Ability>();
-        foreach (Ability ability in abilities)
-        {
-            Destroy(ability);
-        }
 
         CardScript cardScript = GetComponent<CardScript>();
         if(cardScript != null)
         {
             cardScript.InHandDeath();
             Destroy(cardScript);
-        }
-        
-        InHandSpellPlay play = GetComponent<InHandSpellPlay>();
-        if(play != null)
-        {
-            // gameActions.actions.Remove(play);
-            Destroy(play);
-        }
-
-        InHandCharacterPlay charPlay = GetComponent<InHandCharacterPlay>();
-        if(charPlay != null)
-        {
-            Destroy(charPlay);
         }
     }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnityEngine;
+using SequenceSystem;
 
 public class CardAbilityFactory : MonoBehaviour
 {
@@ -105,17 +106,13 @@ public class CardAbilityFactory : MonoBehaviour
         }
     }
 
-    public Ability AddKeyword(string keywordName, CardParent card)
+    public void AddKeyword(string keywordName, CardParent card)
     {
-
-        Ability keyword = null;
         if (keywordsByName.ContainsKey(keywordName))
         {
             Type keywordType = keywordsByName[keywordName];
-            keyword = card.gameObject.AddComponent(keywordType) as Ability;
+            card.gameObject.AddComponent(keywordType);
         }
-        
-        return keyword;
     }
 
     public void RemoveKeyword(string keywordName, CardParent card)
@@ -132,16 +129,12 @@ public class CardAbilityFactory : MonoBehaviour
         }
     }
 
-    public Ability AddInHandKeyword(string keywordName, CardParent card)
+    public void AddInHandKeyword(string keywordName, CardParent card)
     {
-        Ability keyword = null;
-
         if (inHandKeywordsByName.ContainsKey(keywordName))
         {
             Type keywordType = inHandKeywordsByName[keywordName];
-            keyword = card.gameObject.AddComponent(keywordType) as Ability;
+            card.gameObject.AddComponent(keywordType);
         }
-
-        return keyword;
     }
 }

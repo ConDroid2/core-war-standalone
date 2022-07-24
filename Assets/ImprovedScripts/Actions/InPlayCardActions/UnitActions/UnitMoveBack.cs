@@ -5,7 +5,7 @@ using DG.Tweening;
 
 namespace SequenceSystem 
 {
-    public class UnitMoveBack : GameAction, NetworkedAction
+    public class UnitMoveBack : GameAction
     {
         UnitController controller;
         public UnitMoveBack(UnitController controller)

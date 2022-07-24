@@ -5,7 +5,7 @@ using SequenceSystem;
 
 namespace SequenceSystem
 { 
-    public class PutInHand : GameAction, NetworkedAction
+    public class PutInHand : GameAction
     {
         private CardController card;
 

@@ -106,9 +106,4 @@ public class ActionSequencer
     {
         return list;
     }
-
-    // Remove these when refactor done
-    public void AddGameAction(GameAction action) { }
-    public void AddGameActionFirst(GameAction action) { }
-    public void AddGameAction(IEnumerable<GameAction> actions) { }
 }

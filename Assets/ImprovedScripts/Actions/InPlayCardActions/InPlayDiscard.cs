@@ -5,7 +5,7 @@ using DG.Tweening;
 
 namespace SequenceSystem 
 {
-    public class InPlayDiscard : GameAction, NetworkedAction
+    public class InPlayDiscard : GameAction
     {
         InPlayCardController controller;
         public InPlayDiscard(InPlayCardController controller)

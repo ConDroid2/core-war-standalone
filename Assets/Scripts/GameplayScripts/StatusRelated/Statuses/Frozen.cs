@@ -10,7 +10,7 @@ public class Frozen : Status
         vfxPath = "Frozen";
         base.Awake();
 
-        if (card.photonView.IsMine)
+        if (card.isMine)
         {
             card.OnAttackStateChanged += FreezeUnit;
             card.OnMoveStateChanged += FreezeUnit;
@@ -42,7 +42,7 @@ public class Frozen : Status
     {
         base.RemoveStatus();
 
-        if (card.photonView.IsMine)
+        if (card.isMine)
         {
             card.OnMoveStateChanged -= FreezeUnit;
             card.OnAttackStateChanged -= FreezeUnit;

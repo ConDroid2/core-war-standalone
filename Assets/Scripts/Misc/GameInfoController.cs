@@ -48,7 +48,7 @@ public class GameInfoController : MonoBehaviour
         text += "<b><u>Mine</u></b><br>";
         foreach(InPlayCardController unit in UnderworldManager.Instance.souls)
         {
-            if (unit.photonView.IsMine)
+            if (unit.isMine)
             {
                 text += unit.cardData.name + "<br><br>";
             }       
@@ -56,7 +56,7 @@ public class GameInfoController : MonoBehaviour
         text += "<br><b><u>Enemy's</u></b><br>";
         foreach(InPlayCardController unit in UnderworldManager.Instance.souls)
         {
-            if (!unit.photonView.IsMine)
+            if (!unit.isMine)
             {
                 text += unit.cardData.name + "<br><br>";
             }

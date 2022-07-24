@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SequenceSystem 
 {
-    public class InHandRemoveFromPlay : GameAction, NetworkedAction
+    public class InHandRemoveFromPlay : GameAction
     {
         CardController controller;
         public InHandRemoveFromPlay(CardController controller)

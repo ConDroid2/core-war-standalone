@@ -91,11 +91,4 @@ public class MainSequenceManager : MonoBehaviour
 
         return true;
     }
-
-    
-
-    // Remove these when refactor done
-    public void Add(GameAction action) { }
-    public void AddNext(GameAction action) { }
-    public void Add(IEnumerable<GameAction> actions) { }
 }
