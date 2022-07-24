@@ -11,7 +11,7 @@ public class WoodlandGuide : CardScript
     public override void InPlaySetUp()
     {
         UnitController unit = GetComponent<UnitController>();
-        if (unit.photonView.IsMine)
+        if (unit.isMine)
         {
             tutor = GetComponent<Tutor>();
             addTutor = new SequenceSystem.AddKeyword("Tutor", unit);

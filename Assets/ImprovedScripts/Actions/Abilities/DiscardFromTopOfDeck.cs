@@ -59,8 +59,7 @@ namespace SequenceSystem
                     card.transform.position = deck.transform.position;
                     card.initialPos = deck.transform.position;
 
-                    object[] rpcData = { cardInfo.GetJson(), false };
-                    card.photonView.RPC("SetUpCardFromJson", Photon.Pun.RpcTarget.All, rpcData);
+                    card.SetUpCardFromJson(cardInfo.GetJson());
 
                     var sequence = DOTween.Sequence();
 

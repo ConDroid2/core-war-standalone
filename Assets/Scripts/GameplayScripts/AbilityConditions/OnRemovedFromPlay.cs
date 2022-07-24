@@ -8,7 +8,7 @@ public class OnRemovedFromPlay : AbilityCondition
     public OnRemovedFromPlay(InPlayCardController card)
     {
         this.card = card;
-        if(card.photonView.IsMine)
+        if(card.isMine)
             this.card.OnRemovedFromPlay += HandleCondition;
     }
 
@@ -24,7 +24,7 @@ public class OnRemovedFromPlay : AbilityCondition
 
     public override void SetUp()
     {
-        if(card.photonView.IsMine)
+        if(card.isMine)
             card.OnRemovedFromPlay += HandleCondition;
     }
 }

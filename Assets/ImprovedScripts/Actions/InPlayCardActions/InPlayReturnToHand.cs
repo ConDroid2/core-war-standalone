@@ -21,7 +21,7 @@ namespace SequenceSystem
 
         public override void PerformGameAction()
         {
-            if (controller.photonView.IsMine)
+            if (controller.isMine)
             {
                 CardController card = CardPool.Instance.Get();
 
@@ -30,8 +30,7 @@ namespace SequenceSystem
                 card.transform.position = controller.transform.position;
                 card.initialPos = controller.transform.position;
 
-                object[] rpcData = { controller.cardData.GetJson(), false };
-                card.photonView.RPC("SetUpCardFromJson", Photon.Pun.RpcTarget.All, rpcData);
+                card.SetUpCardFromJson(controller.cardData.GetJson());
 
                 // Get put in hand action
                 MainSequenceManager.Instance.AddNext(card.putInHand);

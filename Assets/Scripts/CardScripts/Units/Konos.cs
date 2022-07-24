@@ -18,7 +18,7 @@ public class Konos : CardScript
         SequenceSystem.Aura aura = new SequenceSystem.Aura(
             increase,
             decrease,
-            unit.photonView.IsMine,
+            unit.isMine,
             handFilter: CardSelector.HandFilter.EnemyHand,
             controller: unit);
 

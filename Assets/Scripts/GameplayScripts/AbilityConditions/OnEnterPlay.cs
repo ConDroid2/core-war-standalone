@@ -26,7 +26,7 @@ public class OnEnterPlay : AbilityCondition
 
     public override void SetUp()
     {
-        if (card.photonView.IsMine)
+        if (card.isMine)
         {
             if (card is UnitController)
             {

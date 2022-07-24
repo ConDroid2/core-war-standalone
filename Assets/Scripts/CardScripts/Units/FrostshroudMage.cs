@@ -7,7 +7,7 @@ public class FrostshroudMage : CardScript
     public override void InPlaySetUp()
     {
         UnitController unit = GetComponent<UnitController>();
-        OnEnemyUnitEnteredPlay onEnemyUnitEntered = new OnEnemyUnitEnteredPlay(unit.photonView.IsMine);
+        OnEnemyUnitEnteredPlay onEnemyUnitEntered = new OnEnemyUnitEnteredPlay(unit.isMine);
         conditions.Add(onEnemyUnitEntered);
 
         SequenceSystem.AddStatus addStatus = new SequenceSystem.AddStatus("Rooted", 2);

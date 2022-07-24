@@ -10,7 +10,7 @@ public class SacrificialOffering : CardScript
         OnDeath onDeath = new OnDeath(unit);
         conditions.Add(onDeath);
 
-        SequenceSystem.OpponentDiscard opponentDiscard = new SequenceSystem.OpponentDiscard(unit.photonView.ViewID, CardSelector.TypeFilter.All, 1);
-        onDeath.AddAbility(opponentDiscard);
+        //SequenceSystem.OpponentDiscard opponentDiscard = new SequenceSystem.OpponentDiscard(unit.photonView.ViewID, CardSelector.TypeFilter.All, 1);
+        //onDeath.AddAbility(opponentDiscard);
     }
 }

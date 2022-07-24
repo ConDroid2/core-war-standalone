@@ -7,7 +7,7 @@ public class Twincaster : CardScript
     public override void InPlaySetUp()
     {
         UnitController unit = GetComponent<UnitController>();
-        OnNextSpell onNextSpell = new OnNextSpell(unit.photonView.IsMine);
+        OnNextSpell onNextSpell = new OnNextSpell(unit.isMine);
         conditions.Add(onNextSpell);
 
         SequenceSystem.CreateAndPlayCard createAndPlay = new SequenceSystem.CreateAndPlayCard(

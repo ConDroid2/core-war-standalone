@@ -7,7 +7,7 @@ public class CoiledViper : CardScript
     public override void InPlaySetUp()
     {
         UnitController unit = GetComponent<UnitController>();
-        OnEnemyUnitEnteredPlay onEnemyUnitEntered = new OnEnemyUnitEnteredPlay(unit.photonView.IsMine);
+        OnEnemyUnitEnteredPlay onEnemyUnitEntered = new OnEnemyUnitEnteredPlay(unit.isMine);
         conditions.Add(onEnemyUnitEntered);
 
         SequenceSystem.Damage damage = new SequenceSystem.Damage(new IntInput("MyStrength", unit));

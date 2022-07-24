@@ -68,8 +68,7 @@ public class PlayRandomCardsFromDeck : Ability
             cardController.transform.position = deck.transform.position;
             cardController.initialPos = deck.transform.position;
 
-            object[] rpcData = { card.fileName, false };
-            cardController.photonView.RPC("SetUpCardInfo", Photon.Pun.RpcTarget.All, rpcData);
+            cardController.SetUpCardFromName(card.fileName, false);
 
             sequence.AddGameAction(cardController.play);
             yield return StartCoroutine(sequence.RunSequence());

@@ -48,7 +48,7 @@ public class InPlayCardPool : MonoBehaviour
     {
         for (int i = 0; i < amount; i++)
         {
-            UnitController newCard = PhotonNetwork.Instantiate("Prefabs/Unit", Vector3.zero, Quaternion.identity).GetComponent<UnitController>();
+            UnitController newCard = Instantiate(cardPrefab, Vector3.zero, Quaternion.identity) as UnitController;
             newCard.gameObject.SetActive(false);
             cards.Enqueue(newCard);
         }

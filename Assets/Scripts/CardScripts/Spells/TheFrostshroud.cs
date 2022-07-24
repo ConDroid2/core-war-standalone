@@ -12,7 +12,7 @@ public class TheFrostshroud : CardScript
 
         SequenceSystem.ConditionalOngoingEffect ongoingEffect = new SequenceSystem.ConditionalOngoingEffect();
         //
-        OnEnemyUnitEnteredPlay onEnemyUnitEnteredPlay = new OnEnemyUnitEnteredPlay(card.photonView.IsMine);
+        OnEnemyUnitEnteredPlay onEnemyUnitEnteredPlay = new OnEnemyUnitEnteredPlay(card.isMine);
         SequenceSystem.AddStatus addStatus = new SequenceSystem.AddStatus("Rooted", 2);
         onEnemyUnitEnteredPlay.AddAbility(addStatus);
         //

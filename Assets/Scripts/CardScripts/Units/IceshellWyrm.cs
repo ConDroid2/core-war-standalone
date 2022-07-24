@@ -20,7 +20,7 @@ public class IceshellWyrm : CardScript
         buff = new SequenceSystem.BuffInPlay(1, 1, unit);
         heal = new SequenceSystem.Heal();
 
-        if (unit.photonView.IsMine)
+        if (unit.isMine)
         {
             unit.OnAddStatus += HandleFrozen;
         }     
@@ -30,7 +30,7 @@ public class IceshellWyrm : CardScript
     {
         base.InPlayDeath();
 
-        if (unit.photonView.IsMine)
+        if (unit.isMine)
         {
             GetComponent<UnitController>().OnAddStatus -= HandleFrozen;
         }      

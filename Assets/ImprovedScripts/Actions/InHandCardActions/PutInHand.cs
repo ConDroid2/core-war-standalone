@@ -23,7 +23,7 @@ namespace SequenceSystem
 
         public override void PerformGameAction()
         {
-            if (card.photonView.IsMine)
+            if (card.isMine)
             {
                 Player.Instance.hand.AddCard(card);
             }

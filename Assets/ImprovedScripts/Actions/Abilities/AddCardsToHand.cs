@@ -30,8 +30,7 @@ namespace SequenceSystem
                 card.transform.position = Vector3.zero;
                 card.initialPos = Vector3.zero;
 
-                object[] rpcData = { cardName, false };
-                card.photonView.RPC("SetUpCardFromName", Photon.Pun.RpcTarget.All, rpcData);
+                card.SetUpCardFromName(cardName);
 
                 // Get put in hand action
                 MainSequenceManager.Instance.AddNext(card.putInHand);

@@ -28,27 +28,27 @@ public class CarrionBirds : CardScript
         }
         public override void PerformGameAction()
         {
-            List<UnitController> enemySouls = new List<UnitController>();
+            //List<UnitController> enemySouls = new List<UnitController>();
 
-            foreach (InPlayCardController soul in UnderworldManager.Instance.souls)
-            {
-                if (!soul.photonView.IsMine)
-                {
-                    enemySouls.Add(soul as UnitController);
-                }
-            }
+            //foreach (InPlayCardController soul in UnderworldManager.Instance.souls)
+            //{
+            //    if (!soul.photonView.IsMine)
+            //    {
+            //        enemySouls.Add(soul as UnitController);
+            //    }
+            //}
 
             
-            int amountToSummon = Mathf.Clamp(enemySouls.Count, 0, 5);
-            SequenceSystem.Summon summon = new SequenceSystem.Summon(amountToSummon, "Raven", card.gameObject);
+            //int amountToSummon = Mathf.Clamp(enemySouls.Count, 0, 5);
+            //SequenceSystem.Summon summon = new SequenceSystem.Summon(amountToSummon, "Raven", card.gameObject);
 
-            foreach (UnitController soul in enemySouls)
-            {
-                object[] id = { soul.photonView.ViewID };
-                UnderworldManager.Instance.photonView.RPC("ExorciseFromUnderworld", Photon.Pun.RpcTarget.All, id);
-            }
+            //foreach (UnitController soul in enemySouls)
+            //{
+            //    object[] id = { soul.photonView.ViewID };
+            //    UnderworldManager.Instance.photonView.RPC("ExorciseFromUnderworld", Photon.Pun.RpcTarget.All, id);
+            //}
 
-            MainSequenceManager.Instance.Add(summon);
+            //MainSequenceManager.Instance.Add(summon);
 
             OnEnd();
         }

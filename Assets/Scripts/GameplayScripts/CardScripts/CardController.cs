@@ -6,7 +6,6 @@ using UnityEngine.EventSystems;
 using DG.Tweening;
 using TMPro;
 using UnityEngine.Rendering;
-using Photon.Pun;
 using SequenceSystem;
 
 // The main script that controls the logic of the cards
@@ -23,8 +22,6 @@ public class CardController : CardParent, IPointerEnterHandler, IPointerExitHand
     
     public enum CardState { Default, InHand, InHandNoCount, Waiting }
     public CardState currentState = CardState.Default;
-
-    [SerializeField] public PhotonView photonView;
 
 
     /** Controlling Variables **/
@@ -70,12 +67,10 @@ public class CardController : CardParent, IPointerEnterHandler, IPointerExitHand
         initialVisualScale = visibleVisuals.localScale;
         initialScale = transform.localScale;
         initialPos = transform.position;
-        initialVisualPos = visibleVisuals.position; 
-        photonView = GetComponent<PhotonView>();
+        initialVisualPos = visibleVisuals.position;
         sortingGroup = GetComponent<SortingGroup>();
     }
 
-    [PunRPC]
     public void SetUpCardFromName(string cardName, bool newSetUp = false)
     {
         cardData = new Card(cardData = new Card(cardName.ConvertToCard()));
@@ -83,7 +78,6 @@ public class CardController : CardParent, IPointerEnterHandler, IPointerExitHand
         SetUpCardInfo(newSetUp);
     }
 
-    [PunRPC]
     public void SetUpCardFromJson(string cardJson, bool newSetUp = false)
     {
         cardData = new Card(JsonUtility.FromJson<CardJson>(cardJson));
@@ -121,7 +115,7 @@ public class CardController : CardParent, IPointerEnterHandler, IPointerExitHand
         OnKeywordsChange?.Invoke(cardData.keywords);
         OnSubtypesChange?.Invoke(cardData.subtypes);
 
-        if (!photonView.IsMine && photonView.Owner != null)
+        if (isMine)
         {
             visible.SetActive(false);
             hidden.SetActive(true);
@@ -145,7 +139,6 @@ public class CardController : CardParent, IPointerEnterHandler, IPointerExitHand
         overPlayableArea = false;
     }
 
-    [PunRPC]
     public void ClearFunctionality()
     {
         Ability[] abilities = GetComponents<Ability>();
@@ -177,13 +170,6 @@ public class CardController : CardParent, IPointerEnterHandler, IPointerExitHand
 
     public void ChangeCost(string school, int newCost)
     {
-        object[] rpcData = { school, newCost };
-        photonView.RPC("ChangeCostRPC", RpcTarget.All, rpcData);
-    }
-
-    [PunRPC]
-    public void ChangeCostRPC(string school, int newCost)
-    {
         cardData.cost[school] = newCost;
         OnCostChange?.Invoke(cardData);
 
@@ -192,13 +178,8 @@ public class CardController : CardParent, IPointerEnterHandler, IPointerExitHand
 
     public void ChangeResilience(int changeAmount)
     {
-        object[] rpcData = { cardData.currentResilience + changeAmount };
-        photonView.RPC("ChangeResilienceRPC", RpcTarget.All, rpcData);
-    }
+        int newResilience = cardData.currentResilience + changeAmount;
 
-    [PunRPC]
-    public void ChangeResilienceRPC(int newResilience)
-    {
         cardData.currentResilience = newResilience;
         cardData.maxResilience = newResilience;
         OnResilienceChange?.Invoke(cardData.currentResilience);
@@ -206,26 +187,16 @@ public class CardController : CardParent, IPointerEnterHandler, IPointerExitHand
 
     public void ChangeStrength(int changeAmount)
     {
-        object[] rpcData = { cardData.currentStrength + changeAmount };
-        photonView.RPC("ChangeStrengthRPC", RpcTarget.All, rpcData);
-    }
+        int newStrength = cardData.currentStrength + changeAmount;
 
-    [PunRPC]
-    public void ChangeStrengthRPC(int newStrength)
-    {
         cardData.currentStrength = newStrength;
         OnDamageChange?.Invoke(cardData.currentStrength);
     }
 
     public void ChangeInfluence(int changeAmount)
     {
-        object[] rpcData = { cardData.currentInfluence + changeAmount };
-        photonView.RPC("ChangeInfluenceRPC", RpcTarget.All, rpcData);
-    }
+        int newInfluence = cardData.currentInfluence + changeAmount;
 
-    [PunRPC]
-    public void ChangeInfluenceRPC(int newInfluence)
-    {
         cardData.currentInfluence = newInfluence;
         OnInfluenceChange?.Invoke(cardData.currentInfluence);
     }
@@ -286,7 +257,6 @@ public class CardController : CardParent, IPointerEnterHandler, IPointerExitHand
         MainSequenceManager.Instance.Add(removeFromPlay);
     }
 
-    // What is this argument name? it sucks.
     public void SetCanBePayedFor(bool canBe)
     {
         canBePayedFor = canBe;
@@ -305,7 +275,8 @@ public class CardController : CardParent, IPointerEnterHandler, IPointerExitHand
     public void OnPointerEnter(PointerEventData eventData) 
     {
         MouseManager.Instance.hoveredObject = gameObject;
-        if (!photonView.IsMine) { return; }
+
+        if (!isMine) { return; }
         if (!dragging && (currentState == CardState.InHand || currentState == CardState.InHandNoCount) && Player.Instance.currentCard == null && !moving)
         {
             visibleVisuals.localScale = (initialVisualScale * scaleFactor);
@@ -321,7 +292,8 @@ public class CardController : CardParent, IPointerEnterHandler, IPointerExitHand
         {
             MouseManager.Instance.hoveredObject = null;
         }
-        if (!photonView.IsMine) { return; }
+
+        if (!isMine) { return; }
         if (!dragging && (currentState == CardState.InHand || currentState == CardState.InHandNoCount) && !moving)
         {
             visibleVisuals.DOScale(Vector3.one, 0.1f);
@@ -333,7 +305,7 @@ public class CardController : CardParent, IPointerEnterHandler, IPointerExitHand
 
     public void OnPointerDown(PointerEventData eventData) 
     {
-        if (eventData.button == PointerEventData.InputButton.Left && (photonView.IsMine || photonView.Owner == null))
+        if (eventData.button == PointerEventData.InputButton.Left && isMine)
         {
             if (currentState == CardState.InHand)
             {
@@ -361,7 +333,7 @@ public class CardController : CardParent, IPointerEnterHandler, IPointerExitHand
 
     public void OnPointerUp(PointerEventData eventData) 
     {
-        if (!photonView.IsMine) { return; }
+        if (!isMine) { return; }
         if (overPlayableArea)
         {
             Player.Instance.PayForCard(Player.Instance.currentCard);
@@ -380,7 +352,7 @@ public class CardController : CardParent, IPointerEnterHandler, IPointerExitHand
 
     public void OnDrag(PointerEventData eventData) 
     {
-        if (!photonView.IsMine || !Player.Instance.myTurn) { return; }
+        if (!isMine || !Player.Instance.myTurn) { return; }
         if (currentState == CardState.InHand && Player.Instance.myTurn)
         {
             transform.position = MouseWorldPos();
@@ -389,13 +361,13 @@ public class CardController : CardParent, IPointerEnterHandler, IPointerExitHand
 
     public void OnBeginDrag(PointerEventData eventData) 
     {
-        if (!photonView.IsMine || !Player.Instance.myTurn) { return; }
+        if (!isMine || !Player.Instance.myTurn) { return; }
         dragging = true;
     }
 
     public void OnEndDrag(PointerEventData eventData) 
     {
-        if (!photonView.IsMine) { return; }
+        if (!isMine) { return; }
         dragging = false;
     }
 

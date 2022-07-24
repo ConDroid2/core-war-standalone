@@ -8,7 +8,7 @@ public class OnIgnitedSpell : AbilityCondition
     public OnIgnitedSpell(InPlayCardController card)
     {
         this.card = card;
-        if (card.photonView.IsMine)
+        if (card.isMine)
         {
             Ignite.OnIgnitedSpellPlayed += HandleCondition;
         }  
@@ -21,7 +21,7 @@ public class OnIgnitedSpell : AbilityCondition
 
     public override void Delete()
     {
-        if (card.photonView.IsMine)
+        if (card.isMine)
         {
             Ignite.OnIgnitedSpellPlayed -= HandleCondition;
         }
@@ -29,7 +29,7 @@ public class OnIgnitedSpell : AbilityCondition
 
     public override void SetUp()
     {
-        if (card.photonView.IsMine)
+        if (card.isMine)
         {
             Ignite.OnIgnitedSpellPlayed += HandleCondition;
         }

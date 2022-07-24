@@ -6,7 +6,7 @@ using System;
 
 namespace SequenceSystem 
 {
-    public class UnitDie : GameAction, NetworkedAction
+    public class UnitDie : GameAction
     {
         UnitController controller;
         public UnitDie(UnitController controller)
@@ -34,11 +34,7 @@ namespace SequenceSystem
                     controller.currentZone = null;
                 }
 
-                if (controller.photonView.IsMine)
-                {
-                    object[] rpcData = { controller.photonView.ViewID };
-                    UnderworldManager.Instance.photonView.RPC("AddToUnderworld", Photon.Pun.RpcTarget.All, rpcData);
-                }
+                UnderworldManager.Instance.AddToUnderworld(controller);
 
                 OnEnd();
             });

@@ -13,8 +13,8 @@ namespace SequenceSystem
 
         public CounterSpell(CounterSpell template)
         {
-            object[] rpcData = { };
-            MainSequenceManager.Instance.photonView.RPC("InterruptCurrentAction", Photon.Pun.RpcTarget.All, rpcData);
+            //object[] rpcData = { };
+            //MainSequenceManager.Instance.photonView.RPC("InterruptCurrentAction", Photon.Pun.RpcTarget.All, rpcData);
         }
 
         public override void PerformGameAction()
@@ -27,10 +27,10 @@ namespace SequenceSystem
 
         public void Counter()
         {
-            object[] rpcData = { };
-            MainSequenceManager.Instance.photonView.RPC("InterruptCurrentAction", Photon.Pun.RpcTarget.All, rpcData);
-            MultiUseButton.Instance.BackToDefault();
-            MultiUseButton.Instance.SetInteractable(false);
+            //object[] rpcData = { };
+            //MainSequenceManager.Instance.photonView.RPC("InterruptCurrentAction", Photon.Pun.RpcTarget.All, rpcData);
+            //MultiUseButton.Instance.BackToDefault();
+            //MultiUseButton.Instance.SetInteractable(false);
             OnEnd();
         }
     }

@@ -13,15 +13,15 @@ public class NimKaderen : CardScript
         OnDeath onDeath = new OnDeath(unit);
         conditions.Add(onDeath);
 
-        SequenceSystem.AddActionToOpponent addDraw =
-            new SequenceSystem.AddActionToOpponent(
-                typeof(SequenceSystem.DrawCards),
-                new object[] { 2 });
-        SequenceSystem.DrawCards draw = new SequenceSystem.DrawCards(2);
-        SequenceSystem.OpponentDiscard discard = new SequenceSystem.OpponentDiscard(unit.photonView.ViewID, CardSelector.TypeFilter.All, 2);
+        //SequenceSystem.AddActionToOpponent addDraw =
+        //    new SequenceSystem.AddActionToOpponent(
+        //        typeof(SequenceSystem.DrawCards),
+        //        new object[] { 2 });
+        //SequenceSystem.DrawCards draw = new SequenceSystem.DrawCards(2);
+        //SequenceSystem.OpponentDiscard discard = new SequenceSystem.OpponentDiscard(unit.photonView.ViewID, CardSelector.TypeFilter.All, 2);
 
-        onEnter.AddAbility(addDraw);
-        onEnter.AddAbility(draw);
-        onDeath.AddAbility(discard);
+        //onEnter.AddAbility(addDraw);
+        //onEnter.AddAbility(draw);
+        //onDeath.AddAbility(discard);
     }
 }

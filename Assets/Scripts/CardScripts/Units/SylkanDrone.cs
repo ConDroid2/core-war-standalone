@@ -16,7 +16,7 @@ public class SylkanDrone : CardScript
 
         removeBuff = new SequenceSystem.BuffInPlay(-1, -1, unit);
 
-        if (unit.photonView.IsMine)
+        if (unit.isMine)
         {
             ApplyBuff(unit);
 
@@ -31,7 +31,7 @@ public class SylkanDrone : CardScript
     {
         base.InPlayDeath();
 
-        if (unit.photonView.IsMine)
+        if (unit.isMine)
         {
             Player.Instance.zones[0].cards.OnCardRemoved -= RemoveBuff;
             Player.Instance.zones[1].cards.OnCardRemoved -= RemoveBuff;

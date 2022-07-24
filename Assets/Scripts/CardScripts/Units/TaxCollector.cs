@@ -17,7 +17,7 @@ public class TaxCollector : CardScript
         SequenceSystem.Aura aura = new SequenceSystem.Aura(
             increaseCost, 
             decreaseCost,
-            unit.photonView.IsMine, 
+            unit.isMine, 
             handFilter: CardSelector.HandFilter.All,
             typeFilter: CardSelector.TypeFilter.Spell);
         OnDeathEvent += aura.RemoveAura;

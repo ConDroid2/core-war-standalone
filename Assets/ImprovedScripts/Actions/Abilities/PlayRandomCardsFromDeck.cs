@@ -77,8 +77,7 @@ namespace SequenceSystem
                 cardController.transform.position = deck.transform.position;
                 cardController.initialPos = deck.transform.position;
 
-                object[] rpcData = { card.GetJson(), false };
-                cardController.photonView.RPC("SetUpCardFromJson", Photon.Pun.RpcTarget.All, rpcData);
+                cardController.SetUpCardFromJson(card.GetJson());
 
                 MainSequenceManager.Instance.AddNext(cardController.play);
             }

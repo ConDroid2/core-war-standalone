@@ -21,8 +21,8 @@ namespace SequenceSystem
         public override void PerformGameAction()
         {
             UnitController unit = target.GetComponent<UnitController>();
-            object[] rpcData = { unit.photonView.ViewID };
-            controller.photonView.RPC("SetAttackTarget", Photon.Pun.RpcTarget.All, rpcData);
+            controller.SetAttackTarget(unit);
+
             MainSequenceManager.Instance.Add(controller.AttackStack);
 
             OnEnd();

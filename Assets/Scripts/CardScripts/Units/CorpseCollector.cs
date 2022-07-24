@@ -17,7 +17,7 @@ public class CorpseCollector : CardScript
         target.abilities.Add(damage);
         onEnterPlay.AddAbility(target);
 
-        OnEnemyUnitDeath onUnitDeath = new OnEnemyUnitDeath(card.photonView.IsMine);
+        OnEnemyUnitDeath onUnitDeath = new OnEnemyUnitDeath(card.isMine);
         conditions.Add(onUnitDeath);
 
         SequenceSystem.DrawCards draw = new SequenceSystem.DrawCards(1);

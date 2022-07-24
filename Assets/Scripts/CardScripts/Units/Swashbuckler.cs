@@ -32,14 +32,13 @@ public class Swashbuckler : CardScript
             controller.transform.DOMove(target.transform.position + new Vector3(0, -1f, -0.3f), 0.15f).OnComplete(() =>
             {
 
-                if (controller.photonView.IsMine)
+                if (controller.isMine)
                 {
                     // Store the attack values since some cards can change their attack stats mid-attack, which shouldn't effect this
                     int attackerDamage = controller.cardData.currentStrength;
                     int defenderDamage = target.cardData.currentStrength;
                     // Deal damage to target
-                    object[] enemyRPC = { attackerDamage };
-                    target.photonView.RPC("RPCTakeDamage", RpcTarget.All, enemyRPC);
+                    target.takeDamage(attackerDamage);
 
                     controller.OnDealDamageTo?.Invoke(target);
 

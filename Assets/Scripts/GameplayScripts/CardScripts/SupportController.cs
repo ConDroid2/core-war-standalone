@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
 using SequenceSystem;
 
 public class SupportController : InPlayCardController
@@ -19,16 +18,14 @@ public class SupportController : InPlayCardController
         actionList.actions.Add(destroy);
     }
 
-    [PunRPC]
-    public void SetUpCardFromName(string cardName)
+    public override void SetUpCardFromName(string cardName)
     {
         cardData = new Card(cardData = new Card(cardName.ConvertToCard()));
 
         SetUpCardInfo();
     }
 
-    [PunRPC]
-    public void SetUpCardFromJson(string cardJson)
+    public override void SetUpCardFromJson(string cardJson)
     {
         cardData = new Card(JsonUtility.FromJson<CardJson>(cardJson));
 
@@ -36,7 +33,7 @@ public class SupportController : InPlayCardController
     }
 
     // In the future make this require a player to be passed in
-    public void SetUpCardInfo()
+    public override void SetUpCardInfo()
     {
         GetComponent<CardGraphicsController>().Setup();
 

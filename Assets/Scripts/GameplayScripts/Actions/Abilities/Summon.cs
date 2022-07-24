@@ -19,8 +19,7 @@ public class Summon : Ability
         {
             InPlayCardController cardController = InPlayCardPool.Instance.Get(transform.position);
             cardController.turnPlayed = MatchManager.Instance.currentTurn;
-            object[] rpcData = { card };
-            cardController.photonView.RPC("SetUpCardInfo", Photon.Pun.RpcTarget.All, rpcData);
+            cardController.SetUpCardFromName(card);
             cardController.gameObject.SetActive(true);
 
             MainSequenceManager.Instance.Add(cardController.GetComponent<CardAdvance>());

@@ -9,7 +9,7 @@ public class Revenant : CardScript
         UnitController unit = GetComponent<UnitController>();
         OnDeath onDeath = new OnDeath(unit);
         conditions.Add(onDeath);
-        OnNightmareDiscarded nightmareDiscard = new OnNightmareDiscarded(unit.photonView.IsMine);
+        OnNightmareDiscarded nightmareDiscard = new OnNightmareDiscarded(unit.isMine);
         conditions.Add(nightmareDiscard);
 
         SequenceSystem.AddActionToOpponent addAction = new SequenceSystem.AddActionToOpponent(typeof(SequenceSystem.AddCardsToHand), new object[] { 1, "Nightmare"});

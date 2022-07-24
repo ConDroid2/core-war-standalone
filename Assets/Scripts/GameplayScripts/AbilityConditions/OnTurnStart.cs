@@ -19,7 +19,7 @@ public class OnTurnStart : AbilityCondition
 
     protected override void HandleCondition()
     {
-        if ((card != null && card.photonView.IsMine) || card == null)
+        if ((card != null && card.isMine) || card == null)
         {
             MainSequenceManager.Instance.Add(abilities);
         }  

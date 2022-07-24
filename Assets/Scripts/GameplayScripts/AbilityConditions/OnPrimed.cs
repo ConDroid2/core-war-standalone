@@ -14,7 +14,7 @@ public class OnPrimed : AbilityCondition
     }
     protected override void HandleCondition()
     {
-        if(Core.Instance.state == Core.PrimedState.ByEnemy && unit.photonView.IsMine)
+        if(Core.Instance.state == Core.PrimedState.ByEnemy && unit.isMine)
         {
             MainSequenceManager.Instance.Add(abilities);
         }

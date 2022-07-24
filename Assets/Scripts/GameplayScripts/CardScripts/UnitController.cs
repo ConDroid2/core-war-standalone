@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
-using Photon.Pun;
 using DG.Tweening;
 using UnityEngine.EventSystems;
 using SequenceSystem;
@@ -65,7 +64,6 @@ public class UnitController : InPlayCardController
         actionList.actions.Add(destroy);
     }
 
-    [PunRPC]
     public void SetUpCardFromName(string cardName)
     {
         cardData = new Card(cardData = new Card(cardName.ConvertToCard()));
@@ -73,7 +71,6 @@ public class UnitController : InPlayCardController
         SetUpCardInfo();
     }
 
-    [PunRPC]
     public void SetUpCardFromJson(string cardJson)
     {
         cardData = new Card(JsonUtility.FromJson<CardJson>(cardJson));
@@ -82,7 +79,6 @@ public class UnitController : InPlayCardController
     }
 
     // In the future make this require a player to be passed in
-    [PunRPC]
     public void SetUpCardInfo()
     {
         GetComponent<CardGraphicsController>().Setup();
@@ -101,16 +97,9 @@ public class UnitController : InPlayCardController
         CardAbilityFactory.Instance.AddInPlayCardFunctionality(this);
     }
 
-    [PunRPC]
-    public void SetAttackTarget(int photonID)
+    public void SetAttackTarget(UnitController newTarget)
     {
-        unitAttack.SetAttackTarget(photonID);
-    }
-
-    [PunRPC]
-    public void RPCTakeDamage(int damage)
-    {
-        takeDamage(damage);
+        unitAttack.SetAttackTarget(newTarget);
     }
 
     public void DefaultTakeDamage(int damage)
@@ -119,16 +108,12 @@ public class UnitController : InPlayCardController
         OnTakeDamage?.Invoke(damage - cardData.armor);
         transform.DOShakePosition(0.1f, strength: new Vector3(1f, 1f, 0f), vibrato: 75);
 
-        object[] rpcData = { newResilience };
-        photonView.RPC("ChangeResilience", RpcTarget.All, rpcData);
+        ChangeResilience(newResilience);
 
-        if (photonView.IsMine)
+        if (newResilience <= 0)
         {
-            if (newResilience <= 0)
-            {
-                Die();
-            }      
-        }      
+            Die();
+        }
     }
 
     public void Die()
@@ -156,14 +141,12 @@ public class UnitController : InPlayCardController
         }
     }
 
-    [PunRPC]
     public void ChangeResilience(int newResilience)
     {
         cardData.currentResilience = newResilience;
         OnResilienceChange?.Invoke(cardData.currentResilience);
     }
 
-    [PunRPC]
     public void IncreaseMaxResilience(int amount)
     {
         cardData.maxResilience = cardData.maxResilience + amount;
@@ -171,21 +154,20 @@ public class UnitController : InPlayCardController
         {
             cardData.maxResilience = 0;
         }
-        if(amount > 0)
+        if (amount > 0)
         {
             OnMaxResillienceIncreased?.Invoke();
         }
         ChangeResilience(cardData.currentResilience + amount);
     }
 
-    [PunRPC]
     public void ChangeDamage(int newDamage)
     {
-        if(newDamage < 0)
+        if (newDamage < 0)
         {
             newDamage = 0;
         }
-        if(newDamage > 0)
+        if (newDamage > 0)
         {
             OnStrengthIncreased?.Invoke();
         }
@@ -193,7 +175,6 @@ public class UnitController : InPlayCardController
         OnDamageChange?.Invoke(cardData.currentStrength);
     }
 
-    [PunRPC]
     public void IncreaseDamage(int amount)
     {
         ChangeDamage(cardData.currentStrength + amount);
@@ -201,25 +182,11 @@ public class UnitController : InPlayCardController
 
     public void ChangeInfluence(int amount)
     {
-        object[] rpcData = { amount };
-        photonView.RPC("ChangeInfluenceRPC", RpcTarget.All, rpcData);
-    }
-
-    [PunRPC]
-    public void ChangeInfluenceRPC(int newAmount)
-    {
-        cardData.currentInfluence = newAmount;
+        cardData.currentInfluence = amount;
         OnInfluenceChange?.Invoke(cardData.currentInfluence);
     }
 
     public void AddKeyword(string keyword)
-    {
-        object[] rpcData = { keyword };
-        photonView.RPC("AddKeywordRPC", RpcTarget.All, rpcData);
-    }
-
-    [PunRPC]
-    public void AddKeywordRPC(string keyword)
     {
         CardAbilityFactory.Instance.AddKeyword(keyword, this);
         cardData.keywords.Add(keyword);
@@ -229,65 +196,37 @@ public class UnitController : InPlayCardController
     {
         if (cardData.keywords.Contains(keyword))
         {
-            object[] rpcData = { keyword };
-            photonView.RPC("RemoveKeywordRPC", RpcTarget.All, rpcData);
+            Debug.Log("Removing keyword");
+            CardAbilityFactory.Instance.RemoveKeyword(keyword, this);
         }
-    }
-
-    [PunRPC]
-    public void RemoveKeywordRPC(string keyword)
-    {
-        Debug.Log("Removing keyword");
-        CardAbilityFactory.Instance.RemoveKeyword(keyword, this);
     }
 
     public void AddStatus(string statusType, int statusAmount)
     {
-        if(statusAmount > 0)
+        if (statusAmount > 0)
         {
-            object[] rpcData = { statusType, statusAmount };
-            photonView.RPC("AddStatusRPC", RpcTarget.All, rpcData);
-        }     
-    }
+            if (!cardData.statusImmunities.Contains(statusType))
+            {
+                StatusFactory.Instance.AddStatus(statusType, statusAmount, this);
+            }
 
-    [PunRPC]
-    public void AddStatusRPC(string statusType, int statusAmount)
-    {
-        if (!cardData.statusImmunities.Contains(statusType))
-        {
-            StatusFactory.Instance.AddStatus(statusType, statusAmount, this);
+            OnAddStatus?.Invoke(statusType);
         }
-
-        OnAddStatus?.Invoke(statusType);
     }
 
     public void RemoveStatus(string statusType)
-    {
-        object[] rpcData = { statusType };
-        photonView.RPC("RemoveStatusRPC", RpcTarget.All, rpcData);
-    }
-
-    [PunRPC]
-    public void RemoveStatusRPC(string statusType)
     {
         StatusFactory.Instance.RemoveStatus(statusType, this);
     }
 
     public void ChangeArmor(int changeAmount)
     {
-        object[] rpcData = { changeAmount };
-        photonView.RPC("ChangeArmorRPC", RpcTarget.All, rpcData);
-    }
-
-    [PunRPC]
-    public void ChangeArmorRPC(int changeAmount)
-    {
         cardData.armor += changeAmount;
     }
 
     public void SetAttackActionState(ActionState newState)
     {
-        if(newState == ActionState.Acted) { actedThisTurn = true; }
+        if (newState == ActionState.Acted) { actedThisTurn = true; }
         attackState = newState;
         OnAttackStateChanged?.Invoke(attackState);
     }
@@ -298,20 +237,20 @@ public class UnitController : InPlayCardController
         moveState = newState;
         OnMoveStateChanged?.Invoke(moveState);
     }
-    
+
     public void SetHoverActive(bool active)
     {
         if (!interactable) { return; }
 
-        if ((attackState == ActionState.CanAct || moveState == ActionState.CanAct) && photonView.IsMine && Player.Instance.myTurn)
+        if ((attackState == ActionState.CanAct || moveState == ActionState.CanAct) && isMine && Player.Instance.myTurn)
         {
             activeHover.SetActive(active);
         }
-        else if (!Player.Instance.myTurn || ((attackState == ActionState.Acted && moveState == ActionState.Acted) && photonView.IsMine))
+        else if (!Player.Instance.myTurn || ((attackState == ActionState.Acted && moveState == ActionState.Acted) && isMine))
         {
             inactiveHover.SetActive(active);
         }
-        else if (!photonView.IsMine)
+        else if (!isMine)
         {
             enemyHover.SetActive(active);
         }

@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
 using System;
 
 public class ActionSequencer
@@ -31,12 +30,6 @@ public class ActionSequencer
             list.RemoveFirst();
             if(currentAction != null)
             { 
-                if(currentAction.sendAction && (currentAction is NetworkedAction))
-                {
-                    int gameActionIndex = currentAction.gameObject.GetComponent<GameActionList>().actions.IndexOf(currentAction);
-                    object[] rpcData = { gameActionIndex };
-                    currentAction.gameObject.GetComponent<PhotonView>().RPC("AddNetworkedActionToSequence", RpcTarget.Others, rpcData);
-                }
                 currentAction.StartGameAction();
                 while (!currentAction.Completed)
                 {
@@ -56,7 +49,7 @@ public class ActionSequencer
     public void AddGameAction(SequenceSystem.GameAction template) 
     {
         OnActionAddedToQueue?.Invoke(template.GetType());
-        if(template is NetworkedAction || template is NonTemplateAction)
+        if(template is NonTemplateAction)
         {
             list.AddLast(template);
         }
@@ -72,7 +65,7 @@ public class ActionSequencer
     public void AddGameActionFirst(SequenceSystem.GameAction template)
     {
         OnActionAddedToQueue?.Invoke(template.GetType());
-        if (template is NetworkedAction || template is NonTemplateAction)
+        if (template is NonTemplateAction)
         {
             list.AddFirst(template);
         }

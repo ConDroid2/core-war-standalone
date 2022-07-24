@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Photon.Pun;
 
 public class GameManager : MonoBehaviour
 {   
@@ -45,29 +44,21 @@ public class GameManager : MonoBehaviour
     public void StartGame() 
     {
         
+        System.Random rng = new System.Random();
 
-        if (PhotonNetwork.IsMasterClient)
+        int firstPlayer = rng.Next(99);
+
+        object[] eventContent = { };
+
+        if (firstPlayer % 2 == 0)
         {
-            System.Random rng = new System.Random();
-
-            int firstPlayer = rng.Next(99);
-
-            object[] eventContent = { };
-
-            if (firstPlayer % 2 == 0)
-            {
-                Player.Instance.myTurn = true;
-
-                NetworkEventSender.Instance.SendEvent(eventContent, NetworkingUtilities.eventDictionary["StartAsSecond"]);
-                StartAsFirstPlayer();
-            } 
-            else
-            {
-                Player.Instance.myTurn = false;
-                
-                NetworkEventSender.Instance.SendEvent(eventContent, NetworkingUtilities.eventDictionary["StartAsFirst"]);
-                StartAsSecondPlayer();
-            }
+            Player.Instance.myTurn = true;
+            StartAsFirstPlayer();
+        } 
+        else
+        {
+            Player.Instance.myTurn = false;
+            StartAsSecondPlayer();
         }
     }
 

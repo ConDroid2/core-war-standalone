@@ -13,7 +13,7 @@ public class OnUnitMaxResIncreased : AbilityCondition
 
     public override void Delete()
     {
-        if (card.photonView.IsMine)
+        if (card.isMine)
         {
             card.OnMaxResillienceIncreased -= HandleCondition;
         }
@@ -21,7 +21,7 @@ public class OnUnitMaxResIncreased : AbilityCondition
 
     public override void SetUp()
     {
-        if (card.photonView.IsMine)
+        if (card.isMine)
         {
             card.OnMaxResillienceIncreased += HandleCondition;
         }

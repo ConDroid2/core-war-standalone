@@ -18,10 +18,10 @@ public class DemonOfDilemmas : CardScript
         SequenceSystem.DiscardCard meDiscard = new SequenceSystem.DiscardCard();
         targetMultiple.AddAbility(meDiscard);
 
-        SequenceSystem.OpponentDiscard opponentDiscard = new SequenceSystem.OpponentDiscard(unit.photonView.ViewID, CardSelector.TypeFilter.All, 2);
+        // SequenceSystem.OpponentDiscard opponentDiscard = new SequenceSystem.OpponentDiscard(unit.photonView.ViewID, CardSelector.TypeFilter.All, 2);
 
         onEnterCore.AddAbility(targetMultiple);
-        onDeath.AddAbility(opponentDiscard);
+        // onDeath.AddAbility(opponentDiscard);
     }
 
 }

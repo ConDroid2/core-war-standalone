@@ -9,7 +9,7 @@ public class HogoFireCatcher : CardScript
     {
         GetComponent<Legendary>().Initialize("Unleash Power");
         card = GetComponent<InPlayCardController>();
-        if (card.photonView.IsMine)
+        if (card.isMine)
         {
             IgniteManager.Instance.resetIgnite = false;
         }     
@@ -20,7 +20,7 @@ public class HogoFireCatcher : CardScript
         base.InPlayDeath();
         List<CardParent> hogos = CardSelector.GetSpecificCard(cardName: "Hogo, Fire Catcher", zoneFilter: CardSelector.ZoneFilter.MyZones);
         hogos.Remove(card);
-        if(hogos.Count <= 0 && card.photonView.IsMine)
+        if(hogos.Count <= 0 && card.isMine)
             IgniteManager.Instance.resetIgnite = true;
     }
 }

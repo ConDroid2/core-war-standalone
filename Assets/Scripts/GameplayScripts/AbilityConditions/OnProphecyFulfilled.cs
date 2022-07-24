@@ -18,7 +18,7 @@ public class OnProphecyFulfilled : AbilityCondition
 
     public override void Delete()
     {
-        if (card.photonView.IsMine)
+        if (card.isMine)
         {
             ProphecyManager.Instance.OnRemoveProphecy -= HandleCondition;
         }
@@ -26,7 +26,7 @@ public class OnProphecyFulfilled : AbilityCondition
 
     public override void SetUp()
     {
-        if (card.photonView.IsMine)
+        if (card.isMine)
         {
             ProphecyManager.Instance.OnRemoveProphecy += HandleCondition;
         }

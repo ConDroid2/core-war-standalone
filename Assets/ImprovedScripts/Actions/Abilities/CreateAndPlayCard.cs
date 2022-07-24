@@ -44,8 +44,7 @@ namespace SequenceSystem
             card.transform.position = gameObject.transform.position;
             card.initialPos = gameObject.transform.position;
 
-            object[] rpcData = { cardName, false };
-            card.photonView.RPC("SetUpCardFromName", Photon.Pun.RpcTarget.All, rpcData);
+            card.SetUpCardFromName(cardName);
 
             card.Play();
             OnEnd();

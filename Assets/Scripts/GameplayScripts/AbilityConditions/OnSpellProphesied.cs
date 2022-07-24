@@ -18,7 +18,7 @@ public class OnSpellProphesied : AbilityCondition
 
     public override void SetUp()
     {
-        if (card.photonView.IsMine)
+        if (card.isMine)
         {
             ProphecyManager.Instance.OnSpellProphesied += HandleCondition;
         }
@@ -26,7 +26,7 @@ public class OnSpellProphesied : AbilityCondition
 
     public override void Delete()
     {
-        if (card.photonView.IsMine)
+        if (card.isMine)
         {
             ProphecyManager.Instance.OnSpellProphesied -= HandleCondition;
         }

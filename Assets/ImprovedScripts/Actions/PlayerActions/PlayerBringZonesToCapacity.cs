@@ -50,8 +50,6 @@ namespace SequenceSystem
                 {
                     InPlayDiscard discard = card.discard;
                     discard.PerformGameAction();
-                    object[] rpcData = { card.gameActions.actions.IndexOf(card.discard) };
-                    card.photonView.RPC("AddNetworkedActionToSequence", Photon.Pun.RpcTarget.All, rpcData);
                 }
 
                 if(currentZone.cards.Count == currentZone.cardCapacity)

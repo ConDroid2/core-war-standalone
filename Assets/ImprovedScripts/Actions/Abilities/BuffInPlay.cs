@@ -31,11 +31,9 @@ namespace SequenceSystem
         {
             UnitController card = target.GetComponent<UnitController>();
 
-            object[] resilienceData = { resilienceIncrease };
-            card.photonView.RPC("IncreaseMaxResilience", Photon.Pun.RpcTarget.All, resilienceData);
+            card.IncreaseMaxResilience(resilienceIncrease);
 
-            object[] damageData = { card.cardData.currentStrength + damageIncrease };
-            card.photonView.RPC("ChangeDamage", Photon.Pun.RpcTarget.All, damageData);
+            card.ChangeDamage(card.cardData.currentStrength + damageIncrease);
 
 
             OnEnd();

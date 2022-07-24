@@ -14,9 +14,9 @@ public class NightHag : CardScript
             new SequenceSystem.AddActionToOpponent(typeof(SequenceSystem.AddCardsToHand),
             new object[] { 2, "Nightmare" });
 
-        SequenceSystem.OpponentDiscard opponentDiscard = new SequenceSystem.OpponentDiscard(unit.photonView.ViewID, CardSelector.TypeFilter.All, 2);
+        //SequenceSystem.OpponentDiscard opponentDiscard = new SequenceSystem.OpponentDiscard(unit.photonView.ViewID, CardSelector.TypeFilter.All, 2);
 
-        onPlay.AddAbility(addNightmares);
-        onPlay.AddAbility(opponentDiscard);
+        //onPlay.AddAbility(addNightmares);
+        //onPlay.AddAbility(opponentDiscard);
     }
 }

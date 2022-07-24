@@ -6,7 +6,7 @@ using DG.Tweening;
 
 namespace SequenceSystem 
 {
-    public class UnitAttack : GameAction, NetworkedAction
+    public class UnitAttack : GameAction
     {
         protected UnitController controller;
         protected UnitController target;
@@ -30,17 +30,15 @@ namespace SequenceSystem
             controller.transform.DOMove(target.transform.position + new Vector3(0, -1f, -0.3f), 0.15f).OnComplete(() =>
             {
 
-                if (controller.photonView.IsMine)
+                if (controller.isMine)
                 {
-                    // Store the attack values since some cards can change their attack stats mid-attack, which shouldn't effec this
+                    // Store the attack values since some cards can change their attack stats mid-attack, which shouldn't effect this
                     int attackerDamage = controller.cardData.currentStrength;
                     int defenderDamage = target.cardData.currentStrength;
                     // Attacker deal damage to target
-                    object[] rpcData = { defenderDamage };
-                    controller.photonView.RPC("RPCTakeDamage", RpcTarget.All, rpcData);
+                    target.takeDamage(attackerDamage);
                     // Target deal damage to attacker
-                    object[] enemyRPC = { attackerDamage };
-                    target.photonView.RPC("RPCTakeDamage", RpcTarget.All, enemyRPC);
+                    controller.takeDamage(defenderDamage);
 
                     controller.OnDealDamageTo?.Invoke(target);
                     target.OnDealDamageTo?.Invoke(controller);
@@ -64,9 +62,9 @@ namespace SequenceSystem
             });
         }
 
-        public void SetAttackTarget(int photonID)
+        public void SetAttackTarget(UnitController newTarget)
         {
-            target = PhotonView.Find(photonID).gameObject.GetComponent<UnitController>();
+            target = newTarget;
         }
 
     }

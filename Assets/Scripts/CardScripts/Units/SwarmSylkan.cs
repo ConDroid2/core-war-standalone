@@ -22,7 +22,7 @@ public class SwarmSylkan : CardScript
         buff = new SequenceSystem.BuffInPlay(1, 1, card as UnitController);
         removeBuff = new SequenceSystem.BuffInPlay(-1, -1, card as UnitController);
 
-        if (card.photonView.IsMine)
+        if (card.isMine)
         {
             Player.Instance.zones[0].cards.OnCardAdded += IncreaseStats;
             Player.Instance.zones[1].cards.OnCardAdded += IncreaseStats;
@@ -34,7 +34,7 @@ public class SwarmSylkan : CardScript
     {
         base.InPlayDeath();
 
-        if (card.photonView.IsMine)
+        if (card.isMine)
         {
             Player.Instance.zones[0].cards.OnCardAdded -= IncreaseStats;
             Player.Instance.zones[1].cards.OnCardAdded -= IncreaseStats;

@@ -8,7 +8,7 @@ public class OnSpellCast : AbilityCondition
     public OnSpellCast(InPlayCardController card)
     {
         this.card = card;
-        if (card.photonView.IsMine)
+        if (card.isMine)
         {
             Player.Instance.spellManager.OnSpellCast += HandleCondition;
         }
@@ -26,7 +26,7 @@ public class OnSpellCast : AbilityCondition
 
     public override void Delete()
     {
-        if ((card != null && card.photonView.IsMine) || card == null)
+        if ((card != null && card.isMine) || card == null)
         {
             Player.Instance.spellManager.OnSpellCast -= HandleCondition;
         }
@@ -34,7 +34,7 @@ public class OnSpellCast : AbilityCondition
 
     public override void SetUp()
     {
-        if (card.photonView.IsMine)
+        if (card.isMine)
         {
             Player.Instance.spellManager.OnSpellCast += HandleCondition;
         }

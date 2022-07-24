@@ -21,7 +21,7 @@ public class SylkanVanguard : CardScript
         SequenceSystem.Aura aura = new SequenceSystem.Aura(
             addBuff,
             removeBuff,
-            card.photonView.IsMine,
+            card.isMine,
             zoneFilter: CardSelector.ZoneFilter.MyZones,
             typeFilter: CardSelector.TypeFilter.Unit,
             subtypeFilter: "Sylkan");

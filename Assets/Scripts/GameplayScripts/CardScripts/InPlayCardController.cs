@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using DG.Tweening;
-using Photon.Pun;
 using UnityEngine.Rendering;
 using UnityEngine.EventSystems;
 using SequenceSystem;
-[RequireComponent(typeof(PhotonView))]
 [RequireComponent(typeof(ActionSequenceRunner))]
 public class InPlayCardController : CardParent 
 {
@@ -29,8 +27,6 @@ public class InPlayCardController : CardParent
     [HideInInspector] public int turnPlayed;
     public bool playedThisTurn => turnPlayed == MatchManager.Instance.currentTurn;
 
-    [HideInInspector] public PhotonView photonView;
-
     [HideInInspector] public bool interactable = true;
 
     public static Action<InPlayCardController> OnSelected;
@@ -51,7 +47,6 @@ public class InPlayCardController : CardParent
         returnToHand = new InPlayReturnToHand(this);
         list.actions.Add(returnToHand);
 
-        photonView = GetComponent<PhotonView>();
         cardSequence = GetComponent<ActionSequenceRunner>();
         CardController.OnSelected += TurnOffCollider;
         CardController.OnUnselected += TurnOnCollider;
@@ -63,6 +58,10 @@ public class InPlayCardController : CardParent
         CardController.OnSelected -= TurnOffCollider;
         CardController.OnUnselected -= TurnOnCollider;
     }
+
+    public virtual void SetUpCardFromName(string name) { }
+    public virtual void SetUpCardFromJson(string Json) { }
+    public virtual void SetUpCardInfo() { }
 
     /** Functional Functions **/
 
@@ -86,13 +85,6 @@ public class InPlayCardController : CardParent
     }
 
     public void SetCurrentZoneNum(int newCurrentZoneNum)
-    {
-        object[] rpcData = { newCurrentZoneNum };
-        photonView.RPC("SetCurrentZoneNumRPC", RpcTarget.All, rpcData);
-    }
-
-    [PunRPC]
-    public void SetCurrentZoneNumRPC(int newCurrentZoneNum)
     {
         currentZoneNum = newCurrentZoneNum;
     }

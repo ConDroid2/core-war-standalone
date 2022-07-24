@@ -7,6 +7,7 @@ public class DeckSelectionManager : MonoBehaviour
 {
     [SerializeField] private List<DeckSlot> deckSlots = new List<DeckSlot>();
     private List<DeckObject> decks;
+    public string sceneToLoad = "CardGame";
 
     private void Awake() 
     {
@@ -36,7 +37,7 @@ public class DeckSelectionManager : MonoBehaviour
         {
             Debug.Log("Deck selected");
             PlayerPrefs.SetInt("ChosenDeck", slot);
-            SceneManager.LoadScene("FindAndJoinRoom");
+            SceneManager.LoadScene(sceneToLoad);
         }    
     }
 

@@ -8,7 +8,7 @@ public class OnAttemptedSpellCast : AbilityCondition
     public OnAttemptedSpellCast(InPlayCardController card)
     {
         this.card = card;
-        if (card.photonView.IsMine)
+        if (card.isMine)
         {
             MainSequenceManager.Instance.mainSequence.OnActionAddedToQueue += HandleCondition;
             // MainSequenceManager.Instance.secondarySequence.OnActionAddedToQueue += HandleCondition;
@@ -16,7 +16,7 @@ public class OnAttemptedSpellCast : AbilityCondition
     }
     public override void Delete()
     {
-        if (card.photonView.IsMine)
+        if (card.isMine)
         {
             MainSequenceManager.Instance.mainSequence.OnActionAddedToQueue -= HandleCondition;
         }
@@ -24,7 +24,7 @@ public class OnAttemptedSpellCast : AbilityCondition
 
     public override void SetUp()
     {
-        if(card.photonView.IsMine)
+        if(card.isMine)
             MainSequenceManager.Instance.mainSequence.OnActionAddedToQueue += HandleCondition;
     }
 

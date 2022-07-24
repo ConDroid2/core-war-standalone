@@ -28,8 +28,8 @@ namespace SequenceSystem
             Debug.Log("Forcing opponent to discard");
             WaitForDoneEvent wait = new WaitForDoneEvent();
             MainSequenceManager.Instance.AddNext(wait);
-            object[] rpcData = { photonView, amount, typeFilter };
-            MainSequenceManager.Instance.photonView.RPC("MakeOpponentDiscard", Photon.Pun.RpcTarget.Others, rpcData);
+            //object[] rpcData = { photonView, amount, typeFilter };
+            //MainSequenceManager.Instance.photonView.RPC("MakeOpponentDiscard", Photon.Pun.RpcTarget.Others, rpcData);
 
             OnEnd();
         }

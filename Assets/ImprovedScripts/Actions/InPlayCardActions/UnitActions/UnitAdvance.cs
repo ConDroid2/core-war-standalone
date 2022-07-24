@@ -27,7 +27,7 @@ namespace SequenceSystem
             controller.interactable = false;
             if (controller.currentZone == null)
             {
-                if (controller.photonView.IsMine)
+                if (controller.isMine)
                 {
                     newPos = Player.Instance.zones[0].AddCard(controller);
 
@@ -40,7 +40,7 @@ namespace SequenceSystem
                     controller.currentZone = Enemy.Instance.zones[0];
                 }
             }
-            else if (controller.currentZone.nextZone != Core.Instance || (controller.photonView.IsMine && !Core.Instance.lockedForMe) || (!controller.photonView.IsMine && !Core.Instance.lockedForOpponent))
+            else if (controller.currentZone.nextZone != Core.Instance || (controller.isMine && !Core.Instance.lockedForMe) || (!controller.isMine && !Core.Instance.lockedForOpponent))
             {
 
                 controller.currentZone.RemoveCard(controller);

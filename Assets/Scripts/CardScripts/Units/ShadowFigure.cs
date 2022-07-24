@@ -9,7 +9,7 @@ public class ShadowFigure : CardScript
         UnitController unit = GetComponent<UnitController>();
         OnTurnEnd turnEnd = new OnTurnEnd(unit);
         conditions.Add(turnEnd);
-        OnNightmareDiscarded nightmareDiscard = new OnNightmareDiscarded(unit.photonView.IsMine);
-        conditions.Add(nightmareDiscard);
+        //OnNightmareDiscarded nightmareDiscard = new OnNightmareDiscarded(unit.photonView.IsMine);
+        //conditions.Add(nightmareDiscard);
     }
 }

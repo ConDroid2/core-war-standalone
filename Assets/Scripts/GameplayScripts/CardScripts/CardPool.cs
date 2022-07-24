@@ -32,7 +32,7 @@ public class CardPool : MonoBehaviour
     {
         for (int i = 0; i < amount; i++)
         {
-            CardController newCard = PhotonNetwork.Instantiate("Prefabs/NewFullSizeCard", new Vector3(30f, 0f, 0f), Quaternion.identity).GetComponent<CardController>();
+            CardController newCard = Instantiate(cardPrefab, new Vector3(30f, 0f, 0f), Quaternion.identity);
             newCard.gameObject.SetActive(false);
             cards.Enqueue(newCard);
         }

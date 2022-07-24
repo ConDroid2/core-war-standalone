@@ -14,16 +14,16 @@ public class Kardis : CardScript
         OnRemovedFromPlay onRemoved = new OnRemovedFromPlay(unit);
         conditions.Add(onRemoved);
 
-        SequenceSystem.OpponentDiscard opponentDiscard = new SequenceSystem.OpponentDiscard(unit.photonView.ViewID, CardSelector.TypeFilter.Spell, 1);
-        SequenceSystem.AddActionToOpponent decreaseHandSize =
-            new SequenceSystem.AddActionToOpponent(typeof(SequenceSystem.ChangeHandSize),
-            new object[] { -1 });
-        SequenceSystem.AddActionToOpponent increaseHandSize =
-            new SequenceSystem.AddActionToOpponent(typeof(SequenceSystem.ChangeHandSize),
-            new object[] { 1 });
+        //SequenceSystem.OpponentDiscard opponentDiscard = new SequenceSystem.OpponentDiscard(unit.photonView.ViewID, CardSelector.TypeFilter.Spell, 1);
+        //SequenceSystem.AddActionToOpponent decreaseHandSize =
+        //    new SequenceSystem.AddActionToOpponent(typeof(SequenceSystem.ChangeHandSize),
+        //    new object[] { -1 });
+        //SequenceSystem.AddActionToOpponent increaseHandSize =
+        //    new SequenceSystem.AddActionToOpponent(typeof(SequenceSystem.ChangeHandSize),
+        //    new object[] { 1 });
 
-        onEnter.AddAbility(opponentDiscard);
-        onEnter.AddAbility(decreaseHandSize);
-        onRemoved.AddAbility(increaseHandSize);
+        //onEnter.AddAbility(opponentDiscard);
+        //onEnter.AddAbility(decreaseHandSize);
+        //onRemoved.AddAbility(increaseHandSize);
     }
 }

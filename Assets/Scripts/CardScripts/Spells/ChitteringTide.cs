@@ -54,7 +54,7 @@ public class ChitteringTide : CardScript
                     deck.DrawSpecificCard(sylkan);
 
                     UnitController unit = InPlayCardPool.Instance.Get(card.transform.position);
-                    unit.photonView.RPC("SetUpCardFromJson", Photon.Pun.RpcTarget.All, sylkan.GetJson());
+                    unit.SetUpCardFromJson(sylkan.GetJson());
                     unit.gameObject.SetActive(true);
 
                     MainSequenceManager.Instance.Add(unit.unitAdvance);

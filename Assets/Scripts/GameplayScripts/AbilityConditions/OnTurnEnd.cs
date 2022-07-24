@@ -13,7 +13,7 @@ public class OnTurnEnd : AbilityCondition
 
     protected override void HandleCondition()
     {
-        if (card.photonView.IsMine)
+        if (card.isMine)
         {
             MainSequenceManager.Instance.Add(abilities);
         }

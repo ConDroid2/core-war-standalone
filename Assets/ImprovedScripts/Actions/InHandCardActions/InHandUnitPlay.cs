@@ -24,7 +24,7 @@ namespace SequenceSystem
 
             UnitController inPlayCard = InPlayCardPool.Instance.Get(cardController.transform.position);
             inPlayCard.turnPlayed = MatchManager.Instance.currentTurn;
-            inPlayCard.photonView.RPC("SetUpCardFromJson", Photon.Pun.RpcTarget.All, cardController.cardData.GetJson());
+            inPlayCard.SetUpCardFromJson(cardController.cardData.GetJson());
             inPlayCard.gameObject.SetActive(cardController);
 
             cardController.Remove();

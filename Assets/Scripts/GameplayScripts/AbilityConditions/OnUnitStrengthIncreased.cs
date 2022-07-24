@@ -13,7 +13,7 @@ public class OnUnitStrengthIncreased : AbilityCondition
 
     public override void Delete()
     {
-        if (card.photonView.IsMine)
+        if (card.isMine)
         {
             card.OnStrengthIncreased -= HandleCondition;
         }
@@ -21,7 +21,7 @@ public class OnUnitStrengthIncreased : AbilityCondition
 
     public override void SetUp()
     {
-        if (card.photonView.IsMine)
+        if (card.isMine)
         {
             card.OnStrengthIncreased += HandleCondition;
         }

@@ -16,7 +16,6 @@ namespace SequenceSystem
             MultiUseButton.Instance.buttonTimer.EndTimer();
             MultiUseButton.Instance.SetColorYellow();
             object[] eventContent = { };
-            NetworkEventSender.Instance.SendEvent(eventContent, NetworkingUtilities.eventDictionary["TurnEnded"]);
 
             OnEnd();
         }

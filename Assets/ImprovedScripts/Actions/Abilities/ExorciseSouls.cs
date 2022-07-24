@@ -29,8 +29,7 @@ namespace SequenceSystem
             {
                 foreach (InPlayCardController soul in souls)
                 {
-                    object[] id = { soul.photonView.ViewID };
-                    UnderworldManager.Instance.photonView.RPC("ExorciseFromUnderworld", Photon.Pun.RpcTarget.All, id);
+                    UnderworldManager.Instance.ExorciseFromUnderworld(soul);
                 }
             }
             else if(exorciseMode == Mode.Random)
@@ -40,8 +39,7 @@ namespace SequenceSystem
                     if (souls.Count > 0)
                     {
                         int randomIndex = Random.Range(0, souls.Count);
-                        object[] id = { souls[randomIndex].photonView.ViewID };
-                        UnderworldManager.Instance.photonView.RPC("ExorciseFromUnderworld", Photon.Pun.RpcTarget.All, id);
+                        UnderworldManager.Instance.ExorciseFromUnderworld(souls[randomIndex]);
                         souls.RemoveAt(randomIndex);
                     }
                 }

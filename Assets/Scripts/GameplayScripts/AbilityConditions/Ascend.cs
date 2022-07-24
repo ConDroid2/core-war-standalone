@@ -13,7 +13,7 @@ public class Ascend : AbilityCondition
 
     protected override void HandleCondition()
     {
-        if(Core.Instance.state == Core.PrimedState.ByMe && Core.Instance.enteredCard != card && card.photonView.IsMine)
+        if(Core.Instance.state == Core.PrimedState.ByMe && Core.Instance.enteredCard != card && card.isMine)
         {
             Debug.Log("Triggering Ascend");
             MainSequenceManager.Instance.Add(abilities);

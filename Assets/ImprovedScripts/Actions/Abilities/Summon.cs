@@ -29,8 +29,7 @@ namespace SequenceSystem
             {
                 UnitController cardController = InPlayCardPool.Instance.Get(controller.transform.position);
                 cardController.turnPlayed = MatchManager.Instance.currentTurn;
-                object[] rpcData = { card };
-                cardController.photonView.RPC("SetUpCardFromName", Photon.Pun.RpcTarget.All, rpcData);
+                cardController.SetUpCardFromName(card);
                 cardController.gameObject.SetActive(true);
 
                 MainSequenceManager.Instance.Add(cardController.unitAdvance);

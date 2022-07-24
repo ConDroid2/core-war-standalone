@@ -37,7 +37,7 @@ public class WhileCondition : AbilityCondition
 
     public override void SetUp()
     {
-        if (!card.photonView.IsMine) return;
+        if (!card.isMine) return;
         if(dependsOn == ConditionDependsOn.Units) 
         {
             Enemy.Instance.unitManager.OnControlledAmountChanged += HandleCondition;
@@ -66,7 +66,7 @@ public class WhileCondition : AbilityCondition
 
     public override void Delete()
     {
-        if (!card.photonView.IsMine) return;
+        if (!card.isMine) return;
         if (dependsOn == ConditionDependsOn.Units)
         {
             Enemy.Instance.unitManager.OnControlledAmountChanged -= HandleCondition;

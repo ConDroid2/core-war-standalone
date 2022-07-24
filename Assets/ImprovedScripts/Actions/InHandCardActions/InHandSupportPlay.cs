@@ -23,7 +23,7 @@ namespace SequenceSystem
         {
             SupportController newCard = Photon.Pun.PhotonNetwork.Instantiate("Prefabs/Support", Vector3.zero, Quaternion.identity).GetComponent<SupportController>();
             newCard.transform.position = cardController.transform.position;
-            newCard.photonView.RPC("SetUpCardFromJson", Photon.Pun.RpcTarget.All, cardController.cardData.GetJson());
+            newCard.SetUpCardFromJson(cardController.cardData.GetJson());
             newCard.gameObject.SetActive(cardController);
             newCard.SetCurrentZoneNum(zoneToPlayTo);
 

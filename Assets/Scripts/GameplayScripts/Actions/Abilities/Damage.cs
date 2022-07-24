@@ -32,8 +32,7 @@ public class Damage : TargetedAbility
     public override IEnumerator ActionCoroutine()
     {
         // Deal damage to target
-        object[] rpcData = { getAmount() };
-        target.GetComponent<InPlayCardController>().photonView.RPC("RPCTakeDamage", Photon.Pun.RpcTarget.All, rpcData);
+        target.GetComponent<UnitController>().takeDamage(getAmount());
         OnEnd();
         return null;
     }

@@ -26,7 +26,7 @@ namespace SequenceSystem
             {
                 Vector3 newPos = Vector3.zero;
                 controller.interactable = false;
-                if (controller.photonView.IsMine)
+                if (controller.isMine)
                 {
                     newPos = Player.Instance.zones[controller.currentZoneNum - 1].AddCard(controller);
                     controller.currentZone = Player.Instance.zones[controller.currentZoneNum - 1];

@@ -29,8 +29,7 @@ namespace SequenceSystem
                 if(card.cardData.name == cardToReplace)
                 {
                     card.ClearFunctionality();
-                    object[] rpcData = { cardToReplaceWith, true };
-                    card.photonView.RPC("SetUpCardFromName", Photon.Pun.RpcTarget.All, rpcData);
+                    card.SetUpCardFromName(cardToReplaceWith, true);
                     Player.Instance.CheckIfCardCanBePlayed(card);
                 }
             }

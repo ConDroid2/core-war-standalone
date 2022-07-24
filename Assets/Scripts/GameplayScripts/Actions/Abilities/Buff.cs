@@ -7,7 +7,7 @@ public class Buff : TargetedAbility
     public int damageIncrease;
     public int resilienceIncrease;
 
-    private InPlayCardController card;
+    private UnitController card;
 
     private void Awake()
     {
@@ -24,11 +24,8 @@ public class Buff : TargetedAbility
     {
         card = target.GetComponent<UnitController>();
 
-        object[] resilienceData = { resilienceIncrease };
-        card.photonView.RPC("IncreaseMaxResilience", Photon.Pun.RpcTarget.All, resilienceData);
-
-        object[] damageData = { card.cardData.currentStrength + damageIncrease };
-        card.photonView.RPC("ChangeDamage", Photon.Pun.RpcTarget.All, damageData);
+        card.IncreaseMaxResilience(resilienceIncrease);
+        card.ChangeDamage(card.cardData.currentStrength + damageIncrease);
 
 
         OnEnd();

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
-using Photon.Pun;
 using UnityEngine.Rendering;
 
 public class CardParent : MonoBehaviour
@@ -20,6 +19,8 @@ public class CardParent : MonoBehaviour
     public int sortingLayer = 0;
 
     [HideInInspector] public Card cardData;
+
+    [HideInInspector] public bool isMine = true;
 
     /** Events **/
     public Action<string> OnNameChange;
@@ -50,11 +51,6 @@ public class CardParent : MonoBehaviour
     public virtual void Move(Vector3 pos) { }
     public virtual void Play(Vector3 pos) { }
 
-    //protected void InvokeOnDeath() 
-    //{
-    //    OnDeath?.Invoke();
-    //}
-
     public void InvokeOnPlay() 
     {
         OnPlay?.Invoke();
@@ -63,13 +59,6 @@ public class CardParent : MonoBehaviour
     public void InvokeOnInspected()
     {
         OnInspected?.Invoke(cardData);
-    }
-
-    [PunRPC]
-    public void AddComponent(Type type) 
-    {
-        //Component newGameAction = gameObject.AddComponent(type);
-        //gameActions.actions.Add(newGameAction as GameAction);
     }
 
     

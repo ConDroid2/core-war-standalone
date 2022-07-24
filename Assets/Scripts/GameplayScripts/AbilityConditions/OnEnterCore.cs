@@ -12,7 +12,7 @@ public class OnEnterCore : AbilityCondition
     }
     public override void Delete()
     {
-        if (card.photonView.IsMine)
+        if (card.isMine)
         {
             Core.Instance.OnCorePrimed -= HandleCondition;
         }
@@ -20,7 +20,7 @@ public class OnEnterCore : AbilityCondition
 
     public override void SetUp()
     {
-        if (card.photonView.IsMine)
+        if (card.isMine)
         {
             Core.Instance.OnCorePrimed += HandleCondition;
         }

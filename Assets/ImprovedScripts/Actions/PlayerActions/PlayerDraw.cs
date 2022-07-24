@@ -53,8 +53,7 @@ namespace SequenceSystem
                 card.transform.position = player.GetDeck().transform.position;
                 card.initialPos = player.GetDeck().transform.position;
 
-                object[] rpcData = { cardInfo.GetJson(), false };
-                card.photonView.RPC("SetUpCardFromJson", Photon.Pun.RpcTarget.All, rpcData);
+                card.SetUpCardFromJson(cardInfo.GetJson());
 
                 foreach (TargetedAbility ability in abilities)
                 {

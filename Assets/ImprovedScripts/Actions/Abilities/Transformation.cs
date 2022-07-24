@@ -23,8 +23,8 @@ namespace SequenceSystem
         public override void PerformGameAction()
         {
             InPlayCardController newCard = InPlayCardPool.Instance.Get(controller.transform.position);
-            newCard.turnPlayed = controller.turnPlayed;
-            newCard.photonView.RPC("SetUpCardFromName", Photon.Pun.RpcTarget.All, transformInto);
+            newCard.SetUpCardFromName(transformInto);
+            
             newCard.gameObject.SetActive(true);    
 
             // Put it in this card's zone

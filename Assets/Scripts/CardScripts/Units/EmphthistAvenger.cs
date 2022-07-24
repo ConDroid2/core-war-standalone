@@ -6,7 +6,7 @@ public class EmphthistAvenger : CardScript
 {
     public override void InPlaySetUp()
     {
-        OnMyUnitDeath onMyUnitDeath = new OnMyUnitDeath(GetComponent<InPlayCardController>().photonView.IsMine);
+        OnMyUnitDeath onMyUnitDeath = new OnMyUnitDeath(GetComponent<InPlayCardController>().isMine);
         conditions.Add(onMyUnitDeath);
 
         SequenceSystem.DrawCards draw = new SequenceSystem.DrawCards(1);

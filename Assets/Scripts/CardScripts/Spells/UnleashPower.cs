@@ -21,7 +21,7 @@ public class UnleashPower : CardScript
         igniteTarget.abilities.Add(damage);
 
         SequenceSystem.ChangeCost changeCost = new SequenceSystem.ChangeCost(setToAmount: 0);
-        SequenceSystem.Aura costAura = new SequenceSystem.Aura(changeCost, null, card.photonView.IsMine, CardSelector.HandFilter.MyHand);
+        SequenceSystem.Aura costAura = new SequenceSystem.Aura(changeCost, null, card.isMine, CardSelector.HandFilter.MyHand);
         SequenceSystem.AuraOngoingEffect ongoingEffect = new SequenceSystem.AuraOngoingEffect(costAura);
         SequenceSystem.InitiateOngoingEffect initiateEffect = new SequenceSystem.InitiateOngoingEffect(ongoingEffect);
 

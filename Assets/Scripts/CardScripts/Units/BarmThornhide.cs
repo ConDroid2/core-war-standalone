@@ -17,7 +17,6 @@ public class BarmThornhide : CardScript
     {
         unit.DefaultTakeDamage(damage);
 
-        object[] rpcData = { unit.cardData.currentStrength + (damage - unit.cardData.armor) };
-        unit.photonView.RPC("ChangeDamage", Photon.Pun.RpcTarget.All, rpcData);
+        unit.ChangeDamage(unit.cardData.currentStrength + (damage - unit.cardData.armor));
     }
 }

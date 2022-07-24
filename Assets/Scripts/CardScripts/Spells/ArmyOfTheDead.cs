@@ -28,19 +28,20 @@ public class ArmyOfTheDead : CardScript
 
         public override void PerformGameAction()
         {
-            List<Card> units = CardSelector.GetCardsFromDeck(typeFilter: CardSelector.TypeFilter.Unit);
+            //List<Card> units = CardSelector.GetCardsFromDeck(typeFilter: CardSelector.TypeFilter.Unit);
 
-            foreach(Card card in units)
-            {
-                Deck deck = Player.Instance.GetDeck();
-                deck.DrawSpecificCard(card);
-                UnitController unit = InPlayCardPool.Instance.Get(deck.transform.position);
-                object[] rpcData = { card.name };
-                unit.photonView.RPC("SetUpCardInfo", Photon.Pun.RpcTarget.All, rpcData);
+            //foreach(Card card in units)
+            //{
+            //    Deck deck = Player.Instance.GetDeck();
+            //    deck.DrawSpecificCard(card);
+            //    UnitController unit = InPlayCardPool.Instance.Get(deck.transform.position);
+            //    object[] rpcData = { card.name };
+            //    unit.photonView.RPC("SetUpCardInfo", Photon.Pun.RpcTarget.All, rpcData);
+            //    unit.SetUpCardInfo()
 
 
-                UnderworldManager.Instance.photonView.RPC("AddToUnderworld", Photon.Pun.RpcTarget.All, new object[] { unit.photonView.ViewID });
-            }
+            //    UnderworldManager.Instance.photonView.RPC("AddToUnderworld", Photon.Pun.RpcTarget.All, new object[] { unit.photonView.ViewID });
+            //}
 
             OnEnd();
         }

@@ -22,11 +22,11 @@ namespace SequenceSystem
 
         public override void PerformGameAction()
         {
-            if (cardController.photonView.IsMine && (cardController.currentState == CardController.CardState.InHand || cardController.currentState == CardController.CardState.InHandNoCount))
+            if (cardController.isMine && (cardController.currentState == CardController.CardState.InHand || cardController.currentState == CardController.CardState.InHandNoCount))
             {
                 Player.Instance.hand.RemoveCard(cardController);
             }
-            else if (!cardController.photonView.IsMine)
+            else if (!cardController.isMine)
             {
                 Enemy.Instance.hand.RemoveCard(cardController);
             }

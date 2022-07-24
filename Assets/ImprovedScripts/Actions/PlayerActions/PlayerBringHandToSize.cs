@@ -49,11 +49,6 @@ namespace SequenceSystem
 
             GameAction discard = card.discard;
             discard.PerformGameAction();
-            if (card.gameActions.actions.Contains(discard))
-            {
-                object[] rpcData = { card.gameActions.actions.IndexOf(discard) };
-                card.photonView.RPC("AddNetworkedActionToSequence", Photon.Pun.RpcTarget.Others, rpcData);
-            }
 
             if(playerHand == player.handSize)
             {

@@ -23,11 +23,10 @@ namespace SequenceSystem
             {
                 UnitController inPlayCard = InPlayCardPool.Instance.Get();
                 inPlayCard.turnPlayed = MatchManager.Instance.currentTurn;
-                inPlayCard.photonView.RPC("SetUpCardFromName", Photon.Pun.RpcTarget.All, unit.cardData.name);
+                inPlayCard.SetUpCardFromName(unit.cardData.name);
                 inPlayCard.gameObject.SetActive(true);
 
-                object[] rpcData = { unit.photonView.ViewID };
-                UnderworldManager.Instance.photonView.RPC("ExorciseFromUnderworld", Photon.Pun.RpcTarget.All, rpcData);
+                UnderworldManager.Instance.ExorciseFromUnderworld(unit);
 
                 MainSequenceManager.Instance.Add(inPlayCard.unitAdvance);
                 MainSequenceManager.Instance.Add(inPlayCard.unitPlay);

@@ -10,7 +10,7 @@ public class NiainPrinceOfSky : CardScript
     public override void InPlaySetUp()
     {
         UnitController unit = GetComponent<UnitController>();
-        if (unit.photonView.IsMine)
+        if (unit.isMine)
         {
             Enemy.Instance.unitManager.OnUnitDeath += HandleUnitDeath;
         }

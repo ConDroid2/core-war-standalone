@@ -11,13 +11,13 @@ public class Revere : AbilityCondition
     }
     public override void Delete()
     {
-        if(controller.photonView.IsMine)
+        if(controller.isMine)
             TriggerManager.Instance.OnCardPlayed -= HandleCondition;
     }
 
     public override void SetUp()
     {
-        if (controller.photonView.IsMine)
+        if (controller.isMine)
             TriggerManager.Instance.OnCardPlayed += HandleCondition;
     }
 

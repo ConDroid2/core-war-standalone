@@ -27,8 +27,7 @@ namespace SequenceSystem
 
         public override void PerformGameAction()
         {
-            object[] rpcData = { intInput.Value };
-            target.GetComponent<InPlayCardController>().photonView.RPC("RPCTakeDamage", Photon.Pun.RpcTarget.All, rpcData);
+            target.GetComponent<UnitController>().takeDamage(intInput.Value);
             OnEnd();
         }
     }

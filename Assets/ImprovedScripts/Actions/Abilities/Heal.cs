@@ -19,9 +19,7 @@ namespace SequenceSystem
         public override void PerformGameAction()
         {
             UnitController card = target.GetComponent<UnitController>();
-            object[] rpcData = { card.cardData.maxResilience };
-            card.photonView.RPC("ChangeResilience", Photon.Pun.RpcTarget.All, rpcData);
-            // card.ChangeResilience(card.cardData.maxResilience);
+            card.ChangeResilience(card.cardData.maxResilience);
 
             OnEnd();
         }

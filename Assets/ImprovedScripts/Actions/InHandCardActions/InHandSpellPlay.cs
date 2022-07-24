@@ -43,7 +43,7 @@ namespace SequenceSystem
             controller.currentState = CardController.CardState.Waiting;
             controller.Reveal();
 
-            if (!controller.photonView.IsMine)
+            if (!controller.isMine)
             {
                 // doneLooking = false;
                 MultiUseButton.Instance.SetButtonFunction(DoneLooking);
@@ -66,7 +66,7 @@ namespace SequenceSystem
             MultiUseButton.Instance.SetInteractable(Player.Instance.myTurn);
             NetworkEventReceiver.OnNetworkEvent -= HandleOpponentDoneLooking;
 
-            if (controller.photonView.IsMine)
+            if (controller.isMine)
             {
                 if (!interrupted)
                 {

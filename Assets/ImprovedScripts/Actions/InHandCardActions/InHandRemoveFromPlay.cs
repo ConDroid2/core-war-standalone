@@ -22,7 +22,7 @@ namespace SequenceSystem
 
         public override void PerformGameAction()
         {
-            if (controller.photonView.IsMine && (controller.currentState == CardController.CardState.InHand || controller.currentState == CardController.CardState.InHandNoCount || controller.currentState == CardController.CardState.Waiting))
+            if (controller.isMine && (controller.currentState == CardController.CardState.InHand || controller.currentState == CardController.CardState.InHandNoCount || controller.currentState == CardController.CardState.Waiting))
             {
                 if (controller.cardData.script != "")
                 {
@@ -32,7 +32,7 @@ namespace SequenceSystem
                 Player.Instance.hand.RemoveCard(controller);
                 GameObject.Destroy(gameObject);
             }
-            else if (!controller.photonView.IsMine)
+            else if (!controller.isMine)
             {
                 Enemy.Instance.hand.RemoveCard(controller);
                 GameObject.Destroy(gameObject);
